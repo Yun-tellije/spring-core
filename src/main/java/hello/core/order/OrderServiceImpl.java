@@ -11,7 +11,8 @@ public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository = new MemoryMemberRepository();
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // DIP 위반 | 인터페이스와 구현체에 다 의존, OCP 위반 | 소스 코드를 함께 변경해야함
+//    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // DIP 위반 | 인터페이스와 구현체에 다 의존, OCP 위반 | 소스 코드를 함께 변경해야함
+    private DiscountPolicy discountPolicy; // 구현체에 의존하지 않고 인터페이스에 의존
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
