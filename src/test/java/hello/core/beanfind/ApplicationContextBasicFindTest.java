@@ -20,4 +20,11 @@ public class ApplicationContextBasicFindTest {
         MemberService memberService = ac.getBean("memberService", MemberService.class);
         assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
     }
+
+    @Test
+    @DisplayName("이름 없이 타입으로만 조회")
+    void findBeanByType() {
+        MemberService memberService = ac.getBean(MemberService.class); // 같은 타입이 여러 개일 경우는 곤란
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
 }
