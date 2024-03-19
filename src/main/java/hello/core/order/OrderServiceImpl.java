@@ -12,12 +12,23 @@ public class OrderServiceImpl implements OrderService{
 
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // DIP 위반 | 인터페이스와 구현체에 다 의존, OCP 위반 | 소스 코드를 함께 변경해야함
-    private final MemberRepository memberRepository;
+    private MemberRepository memberRepository;
     private DiscountPolicy discountPolicy; // 구현체에 의존하지 않고 인터페이스에 의존
 
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
         System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
         System.out.println("discountPolicy = " + discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }
+
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
