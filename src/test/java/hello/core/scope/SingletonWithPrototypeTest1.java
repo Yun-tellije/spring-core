@@ -2,6 +2,7 @@ package hello.core.scope;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.inject.Provider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.ObjectFactory;
@@ -44,10 +45,10 @@ public class SingletonWithPrototypeTest1 {
 //        private final PrototypeBean prototypeBean; // 생성 시점에 주입
 
         @Autowired
-        private ObjectFactory<PrototypeBean> prototypeBeanProvider;
+        private Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject(); // 스프링 컨테이너를 통해 해당 빈을 찾아서 반환
+            PrototypeBean prototypeBean = prototypeBeanProvider.get(); // 스프링 컨테이너를 통해 해당 빈을 찾아서 반환
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
